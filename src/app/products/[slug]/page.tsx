@@ -6,6 +6,8 @@ import { ProductDetailClient } from "@/components/ProductDetailClient";
 import { PRODUCTS, getProductBySlug } from "@/lib/products";
 import type { Metadata } from "next";
 
+export const instant = false;
+
 export function generateStaticParams() {
   return PRODUCTS.map((product) => ({
     slug: product.slug,

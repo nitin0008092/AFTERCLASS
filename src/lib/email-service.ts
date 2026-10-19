@@ -132,6 +132,21 @@ export async function sendRegistrationEmails(
   }
 
   // 2. Email B: Branded Customer Confirmation (to reg.customer_email)
+  // Note: Resend's free sandbox (onboarding@resend.dev) only delivers to the account owner email.
+  // Once a custom domain is verified, it delivers to all customers.
+  const isSandbox = fromEmail.includes("onboarding@resend.dev");
+  const isOwnerEmail =
+    reg.customer_email.toLowerCase() === notifyEmail.toLowerCase() ||
+    reg.customer_email.toLowerCase() === "mishra7764@gmail.com";
+
+  if (isSandbox && !isOwnerEmail) {
+    result.customerStatus = "skipped_sandbox_no_domain" as "skipped_no_api_key";
+    console.info(
+      `[AFTERCLASS EMAIL] Customer confirmation for ${reg.customer_email} skipped because Resend sandbox requires a custom domain to email external recipients.`
+    );
+    return result;
+  }
+
   try {
     const customerSubject = "You're on the AFTERCLASS list.";
     const customerHtml = `
