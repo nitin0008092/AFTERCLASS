@@ -30,7 +30,7 @@ export function Hero() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
               <Link
-                href="#drop"
+                href="/shop"
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#171717] text-[#F5F2EB] text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#777A61] transition-all group"
               >
                 <span>EXPLORE THE DROP</span>
@@ -38,7 +38,7 @@ export function Hero() {
               </Link>
 
               <Link
-                href="#story"
+                href="/story"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-[#171717] text-[#171717] text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#171717] hover:text-[#F5F2EB] transition-all"
               >
                 <Compass className="w-3.5 h-3.5" />
@@ -49,12 +49,12 @@ export function Hero() {
             {/* Small Spec Line */}
             <div className="mt-12 pt-8 border-t border-[#B8B5AE]/30 flex flex-wrap gap-8 text-[11px] uppercase tracking-[0.15em] text-[#171717]/60">
               <div>
-                <span className="block text-[#171717] font-semibold">280–320 GSM</span>
-                <span>Heavyweight Knit</span>
+                <span className="block text-[#171717] font-semibold">Development Stage</span>
+                <span>Sample Trials Underway</span>
               </div>
               <div>
-                <span className="block text-[#171717] font-semibold">Bespoke Fit</span>
-                <span>Boxy Drop-Shoulder</span>
+                <span className="block text-[#171717] font-semibold">Silhouette</span>
+                <span>Oversized Drop-Shoulder</span>
               </div>
               <div>
                 <span className="block text-[#171717] font-semibold">Origin</span>

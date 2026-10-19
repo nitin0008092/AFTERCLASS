@@ -36,25 +36,25 @@ export function Navbar() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-10 text-xs font-semibold uppercase tracking-[0.15em] text-[#171717]">
           <Link
-            href="#drop"
+            href="/shop"
             className="hover:text-[#777A61] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-[#777A61] after:transition-all"
           >
             Shop
           </Link>
           <Link
-            href="#drop"
+            href="/shop"
             className="hover:text-[#777A61] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-[#777A61] after:transition-all"
           >
             Collections
           </Link>
           <Link
-            href="#story"
+            href="/story"
             className="hover:text-[#777A61] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-[#777A61] after:transition-all"
           >
             Our Story
           </Link>
           <Link
-            href="#register"
+            href="/updates"
             className="hover:text-[#777A61] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-[#777A61] after:transition-all"
           >
             Launch Updates
@@ -64,7 +64,7 @@ export function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center space-x-5">
           <Link
-            href="#register"
+            href="/#register"
             className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.15em] bg-[#171717] text-[#F5F2EB] hover:bg-[#777A61] transition-colors"
           >
             Early Access
@@ -89,36 +89,36 @@ export function Navbar() {
         <div className="md:hidden fixed inset-x-0 top-[calc(100%+1px)] bg-[#F5F2EB] border-b border-[#171717]/20 p-6 shadow-xl transition-all animate-in slide-in-from-top-2">
           <nav className="flex flex-col space-y-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#171717]">
             <Link
-              href="#drop"
+              href="/shop"
               onClick={() => setMobileMenuOpen(false)}
               className="py-2 border-b border-[#B8B5AE]/30 hover:text-[#777A61] flex justify-between items-center"
             >
               Shop
-              <span className="text-[10px] text-[#777A61]">COMING 31.12</span>
+              <span className="text-[10px] text-[#777A61]">COLLECTION ZERO</span>
             </Link>
             <Link
-              href="#drop"
+              href="/shop"
               onClick={() => setMobileMenuOpen(false)}
               className="py-2 border-b border-[#B8B5AE]/30 hover:text-[#777A61]"
             >
               Collections
             </Link>
             <Link
-              href="#story"
+              href="/story"
               onClick={() => setMobileMenuOpen(false)}
               className="py-2 border-b border-[#B8B5AE]/30 hover:text-[#777A61]"
             >
               Our Story
             </Link>
             <Link
-              href="#register"
+              href="/updates"
               onClick={() => setMobileMenuOpen(false)}
               className="py-2 border-b border-[#B8B5AE]/30 hover:text-[#777A61]"
             >
               Launch Updates
             </Link>
             <Link
-              href="#register"
+              href="/#register"
               onClick={() => setMobileMenuOpen(false)}
               className="mt-4 w-full text-center py-3.5 bg-[#171717] text-[#F5F2EB] text-xs font-bold uppercase tracking-[0.2em]"
             >

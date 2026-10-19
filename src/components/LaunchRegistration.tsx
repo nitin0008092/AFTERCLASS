@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ArrowRight, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
 export function LaunchRegistration() {
@@ -205,9 +206,13 @@ export function LaunchRegistration() {
               <p>
                 This is a launch-interest registration, not a purchase or confirmed preorder.
                 We will never charge your card or sell your data. View our{" "}
-                <a href="#privacy" className="underline hover:text-[#171717]">
-                  Privacy Notice
-                </a>
+                <Link href="/privacy" className="underline hover:text-[#171717]">
+                  Privacy Policy
+                </Link>{" "}
+                and{" "}
+                <Link href="/terms" className="underline hover:text-[#171717]">
+                  Terms
+                </Link>
                 .
               </p>
             </div>

@@ -30,23 +30,28 @@ export function Footer() {
             </p>
             <ul className="space-y-2 text-xs uppercase tracking-wider font-medium text-[#B8B5AE]">
               <li>
-                <Link href="#drop" className="hover:text-[#F5F2EB] transition-colors">
+                <Link href="/shop" className="hover:text-[#F5F2EB] transition-colors">
                   Shop
                 </Link>
               </li>
               <li>
-                <Link href="#drop" className="hover:text-[#F5F2EB] transition-colors">
-                  Collections
+                <Link href="/shop" className="hover:text-[#F5F2EB] transition-colors">
+                  Collection Zero
                 </Link>
               </li>
               <li>
-                <Link href="#story" className="hover:text-[#F5F2EB] transition-colors">
+                <Link href="/story" className="hover:text-[#F5F2EB] transition-colors">
                   Our Story
                 </Link>
               </li>
               <li>
-                <Link href="#register" className="hover:text-[#F5F2EB] transition-colors">
+                <Link href="/updates" className="hover:text-[#F5F2EB] transition-colors">
                   Launch Updates
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-[#F5F2EB] transition-colors">
+                  Contact & Press
                 </Link>
               </li>
             </ul>
@@ -70,15 +75,15 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:contact@afterclass.in"
+                  href="mailto:afterclass121@gmail.com"
                   className="hover:text-[#F5F2EB] transition-colors inline-flex items-center gap-1"
                 >
-                  contact@afterclass.in <ArrowUpRight className="w-3 h-3" />
+                  afterclass121@gmail.com <ArrowUpRight className="w-3 h-3" />
                 </a>
               </li>
               <li>
                 <span className="text-[#B8B5AE]/60 block text-[11px] normal-case tracking-normal">
-                  Press & collaborations: studio@afterclass.in
+                  Founders: Laxya • Nitin • Mimansha
                 </span>
               </li>
             </ul>
@@ -91,17 +96,24 @@ export function Footer() {
             </p>
             <ul className="space-y-2 text-xs uppercase tracking-wider font-medium text-[#B8B5AE]">
               <li>
-                <span className="hover:text-[#F5F2EB] cursor-pointer transition-colors">
+                <Link href="/privacy" className="hover:text-[#F5F2EB] transition-colors">
                   Privacy Policy
-                </span>
+                </Link>
               </li>
               <li>
-                <span className="hover:text-[#F5F2EB] cursor-pointer transition-colors">
+                <Link href="/terms" className="hover:text-[#F5F2EB] transition-colors">
                   Terms of Service
-                </span>
+                </Link>
               </li>
               <li>
-                <span className="text-[#B8B5AE]/60">Launch Disclaimer</span>
+                <Link href="/updates" className="text-[#B8B5AE]/60 hover:text-[#F5F2EB] transition-colors">
+                  Launch Roadmap
+                </Link>
+              </li>
+              <li>
+                <Link href="/admin" className="text-[10px] font-mono text-[#777A61] hover:text-[#F5F2EB] transition-colors">
+                  [Founder Portal]
+                </Link>
               </li>
             </ul>
           </div>
