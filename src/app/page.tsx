@@ -1,6 +1,9 @@
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
+import { FirstProductShowcase } from "@/components/FirstProductShowcase";
+import { SecondProductShowcase } from "@/components/SecondProductShowcase";
+import { ThirdProductShowcase } from "@/components/ThirdProductShowcase";
 import { BrandStatement } from "@/components/BrandStatement";
 import { FeaturedCollection } from "@/components/FeaturedCollection";
 import { EditorialSection } from "@/components/EditorialSection";
@@ -14,6 +17,9 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        <FirstProductShowcase />
+        <SecondProductShowcase />
+        <ThirdProductShowcase />
         <BrandStatement />
         <FeaturedCollection />
         <EditorialSection />
