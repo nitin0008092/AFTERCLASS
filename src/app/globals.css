@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F5F2EB; /* Warm off-white */
+  --foreground: #171717; /* Deep washed black */
+  --muted-olive: #777A61;
+  --concrete: #B8B5AE;
+  --pure-white: #FFFFFF;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  letter-spacing: -0.015em;
+  overflow-x: hidden;
+}
+
+/* Custom editorial selection */
+::selection {
+  background-color: #171717;
+  color: #F5F2EB;
+}
+
+/* Subtle smooth image rendering */
+img {
+  image-rendering: auto;
+}
+
+/* Custom scrollbar for brand feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F2EB;
+}
+::-webkit-scrollbar-thumb {
+  background: #B8B5AE;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #777A61;
+}
