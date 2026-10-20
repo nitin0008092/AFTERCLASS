@@ -137,11 +137,9 @@ export async function processInterestRegistration(
 
   if (clientToUse) {
     try {
-      const { data, error } = await clientToUse
+      const { error } = await clientToUse
         .from("registrations")
-        .insert([record])
-        .select()
-        .single();
+        .insert([record]);
 
       if (error) {
         // Check for duplicate registration if email + product unique is enforced
@@ -155,9 +153,8 @@ export async function processInterestRegistration(
         console.error("[SUPABASE INSERT ERROR]", error.message);
         // Fall back to memory so customer never loses their spot
         localRegistrationsStore.unshift(record);
-      } else if (data) {
+      } else {
         savedToDb = true;
-        record.id = data.id;
       }
     } catch (dbErr) {
       console.error("[SUPABASE EXCEPTION]", dbErr);
@@ -184,7 +181,7 @@ export async function processInterestRegistration(
       record.last_synced_at = sheetResult.syncedAt || null;
 
       // Update statuses in database if saved
-      if (savedToDb && clientToUse && record.id) {
+      if (savedToDb && clientToUse) {
         await clientToUse
           .from("registrations")
           .update({
@@ -194,7 +191,7 @@ export async function processInterestRegistration(
             sync_error: record.sync_error,
             last_synced_at: record.last_synced_at,
           })
-          .eq("id", record.id);
+          .eq("registration_id", record.registration_id);
       }
     } catch (bgError) {
       console.error("[BACKGROUND AUTOMATION ERROR]", bgError);
