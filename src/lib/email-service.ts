@@ -20,6 +20,11 @@ export interface EmailDispatchResult {
 export async function sendRegistrationEmails(
   reg: RegistrationRecord
 ): Promise<EmailDispatchResult> {
+  const resendApiKey = process.env.RESEND_API_KEY;
+  const notifyEmail = process.env.AFTERCLASS_NOTIFY_EMAIL || "afterclass121@gmail.com";
+  const fromEmail = process.env.EMAIL_FROM || "AFTERCLASS <onboarding@resend.dev>";
+  const resend = resendApiKey ? new Resend(resendApiKey) : null;
+
   const result: EmailDispatchResult = {
     internalStatus: "skipped_no_api_key",
     customerStatus: "skipped_no_api_key",

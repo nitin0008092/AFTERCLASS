@@ -1,4 +1,4 @@
-import { supabase, supabaseAdmin, RegistrationRecord } from "./supabase";
+import { supabase, supabaseAdmin, getSupabaseAdmin, getSupabaseClient, RegistrationRecord } from "./supabase";
 import { sendRegistrationEmails } from "./email-service";
 import { syncRegistrationToGoogleSheets } from "./sheets-service";
 
@@ -132,7 +132,7 @@ export async function processInterestRegistration(
   };
 
   // 3. Database Persistence: Supabase
-  const clientToUse = supabaseAdmin || supabase;
+  const clientToUse = getSupabaseAdmin() || getSupabaseClient() || supabaseAdmin || supabase;
   let savedToDb = false;
 
   if (clientToUse) {
@@ -213,7 +213,7 @@ export async function processInterestRegistration(
  * Retrieves all registrations for Founder Admin Dashboard
  */
 export async function getAllRegistrations(): Promise<RegistrationRecord[]> {
-  const clientToUse = supabaseAdmin || supabase;
+  const clientToUse = getSupabaseAdmin() || getSupabaseClient() || supabaseAdmin || supabase;
   if (clientToUse) {
     try {
       const { data, error } = await clientToUse
@@ -240,7 +240,7 @@ export async function updateRegistrationStatus(
   idOrRegId: string,
   newStatus: "pending" | "reviewed" | "contacted" | "vip"
 ): Promise<boolean> {
-  const clientToUse = supabaseAdmin || supabase;
+  const clientToUse = getSupabaseAdmin() || getSupabaseClient() || supabaseAdmin || supabase;
   if (clientToUse) {
     try {
       const { error } = await clientToUse
