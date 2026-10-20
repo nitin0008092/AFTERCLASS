@@ -121,7 +121,7 @@ export function FirstProductShowcase() {
       } else {
         setFormStatus("success");
         setFeedbackMessage(
-          `Priority secured! We'll alert you on WhatsApp (${cleanMobile}) with your exclusive 10% OFF discount coupon (₹629 final price) the moment the ${selectedColor.name} in size ${selectedSize} drops.`
+          `Priority secured! [ID: ${data.registrationId || "AC-CONFIRMED"}]. We'll alert you on WhatsApp (${cleanMobile}) and email with your exclusive 10% OFF discount coupon (₹629 final price) the moment the On a Diet (Coke) Tee drops.`
         );
       }
     } catch {

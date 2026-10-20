@@ -121,7 +121,7 @@ export function SecondProductShowcase() {
       } else {
         setFormStatus("success");
         setFeedbackMessage(
-          `Priority secured! We'll alert you on WhatsApp (${cleanMobile}) with your exclusive 10% OFF discount coupon (₹629 final price) the moment the “WASTED” Tee in ${selectedColor.name} (Size ${selectedSize}) drops.`
+          `Priority secured! [ID: ${data.registrationId || "AC-CONFIRMED"}]. We'll alert you on WhatsApp (${cleanMobile}) and email with your exclusive 10% OFF discount coupon (₹629 final price) the moment the “WASTED” Tee drops.`
         );
       }
     } catch {
