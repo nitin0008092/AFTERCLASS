@@ -165,38 +165,37 @@ export async function processInterestRegistration(
     localRegistrationsStore.unshift(record);
   }
 
-  // 4. Trigger Asynchronous Background Integrations (Resend & Google Sheets)
-  // These run safely and never fail the customer registration if external services error
-  (async () => {
-    try {
-      // Emails
-      const emailResult = await sendRegistrationEmails(record);
-      record.internal_email_status = emailResult.internalStatus;
-      record.customer_email_status = emailResult.customerStatus;
-
-      // Google Sheets
-      const sheetResult = await syncRegistrationToGoogleSheets(record);
-      record.sheets_sync_status = sheetResult.status;
-      record.sync_error = sheetResult.error || null;
-      record.last_synced_at = sheetResult.syncedAt || null;
-
-      // Update statuses in database if saved
-      if (savedToDb && clientToUse) {
-        await clientToUse
-          .from("registrations")
-          .update({
-            internal_email_status: record.internal_email_status,
-            customer_email_status: record.customer_email_status,
-            sheets_sync_status: record.sheets_sync_status,
-            sync_error: record.sync_error,
-            last_synced_at: record.last_synced_at,
-          })
-          .eq("registration_id", record.registration_id);
-      }
-    } catch (bgError) {
-      console.error("[BACKGROUND AUTOMATION ERROR]", bgError);
+  // 4. Trigger Integrations (Resend Emails)
+  // We await this so Vercel Serverless Functions do not freeze/terminate the process before email delivery completes
+  try {
+    const emailResult = await sendRegistrationEmails(record);
+    record.internal_email_status = emailResult.internalStatus;
+    record.customer_email_status = emailResult.customerStatus;
+    if (emailResult.errors && emailResult.errors.length > 0) {
+      record.sync_error = emailResult.errors.join("; ");
     }
-  })();
+  } catch (bgError) {
+    console.error("[BACKGROUND EMAIL ERROR]", bgError);
+    record.internal_email_status = "failed";
+  }
+
+  // Update statuses in database if saved
+  if (savedToDb && clientToUse) {
+    try {
+      await clientToUse
+        .from("registrations")
+        .update({
+          internal_email_status: record.internal_email_status,
+          customer_email_status: record.customer_email_status,
+          sheets_sync_status: "skipped_no_creds",
+          sync_error: record.sync_error,
+          last_synced_at: new Date().toISOString(),
+        })
+        .eq("registration_id", record.registration_id);
+    } catch (updErr) {
+      console.error("[SUPABASE STATUS UPDATE ERROR]", updErr);
+    }
+  }
 
   return {
     success: true,

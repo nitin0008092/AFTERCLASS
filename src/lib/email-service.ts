@@ -1,11 +1,31 @@
 import { Resend } from "resend";
 import { RegistrationRecord } from "./supabase";
 
-const resendApiKey = process.env.RESEND_API_KEY;
-const notifyEmail = process.env.AFTERCLASS_NOTIFY_EMAIL || "afterclass121@gmail.com";
-const fromEmail = process.env.EMAIL_FROM || "AFTERCLASS <onboarding@resend.dev>";
+function resolveFromEmail(raw?: string): string {
+  if (!raw) return "AFTERCLASS <onboarding@resend.dev>";
+  const clean = raw.replace(/^["']|["']$/g, "").trim();
+  // Resend free tier without a custom verified domain requires sending from onboarding@resend.dev
+  // If user entered a gmail/yahoo/outlook address, fall back to onboarding@resend.dev
+  if (
+    clean.includes("@gmail.com") ||
+    clean.includes("@yahoo.com") ||
+    clean.includes("@outlook.com") ||
+    !clean.includes("@")
+  ) {
+    return "AFTERCLASS <onboarding@resend.dev>";
+  }
+  return clean;
+}
 
-const resend = resendApiKey ? new Resend(resendApiKey) : null;
+function resolveNotifyEmail(raw?: string): string {
+  if (!raw) return "afterclass121@gmail.com";
+  return raw.replace(/^["']|["']$/g, "").trim() || "afterclass121@gmail.com";
+}
+
+function getResendClient() {
+  const apiKey = (process.env.RESEND_API_KEY || "").replace(/^["']|["']$/g, "").trim();
+  return apiKey ? new Resend(apiKey) : null;
+}
 
 export interface EmailDispatchResult {
   internalStatus: "sent" | "failed" | "skipped_no_api_key";
@@ -20,10 +40,9 @@ export interface EmailDispatchResult {
 export async function sendRegistrationEmails(
   reg: RegistrationRecord
 ): Promise<EmailDispatchResult> {
-  const resendApiKey = process.env.RESEND_API_KEY;
-  const notifyEmail = process.env.AFTERCLASS_NOTIFY_EMAIL || "afterclass121@gmail.com";
-  const fromEmail = process.env.EMAIL_FROM || "AFTERCLASS <onboarding@resend.dev>";
-  const resend = resendApiKey ? new Resend(resendApiKey) : null;
+  const resend = getResendClient();
+  const notifyEmail = resolveNotifyEmail(process.env.AFTERCLASS_NOTIFY_EMAIL);
+  const fromEmail = resolveFromEmail(process.env.EMAIL_FROM);
 
   const result: EmailDispatchResult = {
     internalStatus: "skipped_no_api_key",
